@@ -1,0 +1,224 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "MirrorApiStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "MirrorApiStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "MirrorApiStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://942988625276/us-west-2",
+      "properties": {
+        "templateFile": "MirrorApiStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::942988625276:role/cdk-hnb659fds-deploy-role-942988625276-us-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::942988625276:role/cdk-hnb659fds-cfn-exec-role-942988625276-us-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-942988625276-us-west-2/216a503de5545803ac8d369ef1bdb969a79dd26c7f1f4c758a310fa1dea035b0.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "MirrorApiStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::942988625276:role/cdk-hnb659fds-lookup-role-942988625276-us-west-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "MirrorApiStack.assets"
+      ],
+      "metadata": {
+        "/MirrorApiStack/RoleForMirrorLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RoleForMirrorLambda0E8CAE0E"
+          }
+        ],
+        "/MirrorApiStack/RoleForMirrorLambda/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RoleForMirrorLambdaDefaultPolicy171CFA0E"
+          }
+        ],
+        "/MirrorApiStack/AngelLambdaFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AngelLambdaFunction982A21BD"
+          }
+        ],
+        "/MirrorApiStack/DevilLambdaFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevilLambdaFunctionE01C872F"
+          }
+        ],
+        "/MirrorApiStack/RoleForApiGwInvokeDrawPublic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RoleForApiGwInvokeDrawPublicA3A208FF"
+          }
+        ],
+        "/MirrorApiStack/RoleForApiGwInvokeDrawPublic/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RoleForApiGwInvokeDrawPublicDefaultPolicyA0BF3757"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGateway06396EB2"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayCloudWatchRoleFB054DF4"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayAccount20309DBE"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayDeploymentCE5892CB65139a80544098717cc61e11da7f2862"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayDeploymentStageprodCB74E360"
+          },
+          {
+            "type": "aws:cdk:warning",
+            "data": "AwsSolutions-APIG3: The REST API stage is not associated with AWS WAFv2 web ACL. AWS WAFv2 is a web application firewall that helps protect web applications and APIs from attacks by allowing configured rules to allow, block, or monitor (count) web requests based on customizable rules and conditions that are defined.\n",
+            "trace": [
+              "Annotations.addMessage (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1608)",
+              "Annotations.addWarning (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/annotations.js:1:931)",
+              "AnnotationLogger.onNonCompliance (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/cdk-nag/src/nag-logger.ts:144:37)",
+              "/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/cdk-nag/src/nag-pack.ts:185:17",
+              "Array.forEach (<anonymous>)",
+              "AwsSolutionsChecks.applyRule (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/cdk-nag/src/nag-pack.ts:184:26)",
+              "AwsSolutionsChecks.checkNetworkDelivery (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/cdk-nag/src/packs/aws-solutions.ts:886:10)",
+              "AwsSolutionsChecks.visit (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/cdk-nag/src/packs/aws-solutions.ts:203:12)",
+              "recurse (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:2282)",
+              "recurse (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:2646)",
+              "recurse (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:2646)",
+              "recurse (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:2646)",
+              "recurse (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:2646)",
+              "invokeAspects (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:1906)",
+              "synthesize (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:1:1450)",
+              "App.synth (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/stage.js:1:2263)",
+              "process.<anonymous> (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/aws-cdk-lib/core/lib/app.js:1:1745)",
+              "Object.onceWrapper (node:events:634:26)",
+              "process.emit (node:events:519:28)",
+              "process.emit (node:domain:488:12)",
+              "process.emit.sharedData.processEmitHook.installedValue [as emit] (/Users/mkhabib/code/workshop/mirror/Claude_only/back-end/node_modules/@cspotcode/source-map-support/source-map-support.js:745:40)"
+            ]
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayEndpoint655917F6"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/angel/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayangel792791F6"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/angel/POST/ApiPermission.MirrorApiStackMirrorApiGateway2F2FF906.POST..angel": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayangelPOSTApiPermissionMirrorApiStackMirrorApiGateway2F2FF906POSTangel57066D3E"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/angel/POST/ApiPermission.Test.MirrorApiStackMirrorApiGateway2F2FF906.POST..angel": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayangelPOSTApiPermissionTestMirrorApiStackMirrorApiGateway2F2FF906POSTangelF66D2638"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/angel/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayangelPOSTAAF9E9DF"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/angel/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewayangelOPTIONS1B9D35BD"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/devil/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewaydevil3CDF0F7D"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/devil/POST/ApiPermission.MirrorApiStackMirrorApiGateway2F2FF906.POST..devil": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewaydevilPOSTApiPermissionMirrorApiStackMirrorApiGateway2F2FF906POSTdevilBDA544B7"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/devil/POST/ApiPermission.Test.MirrorApiStackMirrorApiGateway2F2FF906.POST..devil": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewaydevilPOSTApiPermissionTestMirrorApiStackMirrorApiGateway2F2FF906POSTdevil0A7EB0B1"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/devil/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewaydevilPOST2A2D1656"
+          }
+        ],
+        "/MirrorApiStack/MirrorApiGateway/Default/devil/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MirrorApiGatewaydevilOPTIONS7FE10738"
+          }
+        ],
+        "/MirrorApiStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/MirrorApiStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/MirrorApiStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "MirrorApiStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

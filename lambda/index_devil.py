@@ -1,0 +1,88 @@
+import json
+import boto3
+
+bedrock_client = boto3.client("bedrock-runtime", region_name="us-west-2")
+MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
+
+SYSTEM = '''You are a great fashionista who are sassy and audacious. You like to give cheeky comments about people's outfits.'''
+
+#- Am I the only one noticing that white vest? Is it just me, or does that white vest look like you've recyled some random doctors' blouse? Maybe you're trying to blend the worlds of technology and medicine?
+#- Hello, Ms. Retro Chic! Those red nails and big, old-style curls add a daring touch to your classic outfit. Are you a time traveler from the 50s or just a vintage fashion enthusiast?
+#- Hey mate, did you accidentally mistake your shirt for a crumpled map? Next time don't forget to invite your iron to the party.
+PROMPT_SASSY = """You are at a techical conference and you are talking to the person in the picture.
+Your task is to give a personalized comment about this person's outfit, such as color coordination, fit, style, and accessories.
+
+Follow these rules:
+- Your answer MUST be in Bahasa Indonesia language, be appropriate to Indonesia culture. Don't insult people.
+- Be sassy and funny. Find some noticable feature(s) of the person's look and criticize them on it with a joke.
+- Stay true to the person's image, do NOT comment on feature(s) you cannot see clearly from them.
+- Be concise, write only 3 sentences max. Only response with the answer, do not include any greetings, additional text or explanations.
+
+Examples:
+- Apa cuma saya yang memperhatikan rompi putih itu? Atau hanya perasaan saya saja, rompi putih itu terlihat seperti Anda mendaur ulang baju dokter yang asal comot? Mungkin Anda sedang mencoba memadukan dunia teknologi dan kedokteran?
+- Halo, Nona Retro Chic! Kuku merah dan rambut keriting besar gaya lama itu memberikan sentuhan berani pada pakaian klasik Anda. Apakah Anda penjelajah waktu dari tahun 50-an atau hanya penggemar mode vintage?
+- Hei sobat, apa kamu tidak sengaja salah mengira kemejamu sebagai peta yang kusut? Lain kali jangan lupa mengundang setrikamu ke pesta.
+
+Remember to strictly follow the rules above."""
+
+
+def describe_image(image):
+    """
+    call bedrock claude 3 to describe image
+    """
+
+    messages = [{
+        "role": "user",
+        "content": [
+            {
+                "type": "image",
+                "source": {
+                    "type": "base64",
+                    "media_type": "image/jpeg",
+                    "data": image,
+                },
+            },
+            {"type": "text", "text": PROMPT_SASSY},
+        ],
+    }]
+    
+    body = json.dumps({
+        "anthropic_version": "bedrock-2023-05-31",
+        "max_tokens": 1024,
+        "temperature": 0.4,
+        "messages": messages,
+        "system": SYSTEM
+    })
+    # invoke model
+    response = bedrock_client.invoke_model(
+        body=body,
+        contentType="application/json",
+        accept="*/*",
+        modelId=MODEL_ID,
+    )
+    # model response
+    response_body = json.loads(response.get("body").read())
+    # response
+    return response_body["content"][0]["text"]
+
+
+def lambda_handler(event, context) -> json:
+
+    # parse image from event
+    image = json.loads(event["body"])["image_base64"]
+
+    # describe image
+    desc = describe_image(image)
+
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,HEAD,POST,PUT",
+            "Content-Type": "application/json"
+        },
+        "body": json.dumps({
+            "result": desc
+        })
+    }
